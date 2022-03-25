@@ -1,4 +1,4 @@
-confipeline {
+fipeline {
   agent any
   tools {
     maven 'M3'
