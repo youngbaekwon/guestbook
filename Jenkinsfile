@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+    maven: 'Maven3'
+  }
   stages {
 
     stage('Checkout Application Git Branch') {
@@ -20,9 +23,9 @@ pipeline {
 
     stage('Maven Jar Build') {
         steps {
-          def mvnHome = tool name: 'Maven3', type: 'maven'
-          sh "${mvnHome}/bin/mvn -DskipTests=true clean package"
-          
+          withMaven(maven: 'Maven3') {
+            sh 'mvn -DskipTests=true clean package'
+          }
         }
         post {
                 failure {
