@@ -20,9 +20,9 @@ pipeline {
 
     stage('Maven Jar Build') {
         steps {
-          withMaven(maven: 'Maven3') {
-            sh 'mvn -DskipTests=true clean package'
-          }
+          def mvnHome = tool name: 'Maven3', type: 'maven'
+          sh "${mvnHome}/bin/mvn -DskipTests=true clean package"
+          
         }
         post {
                 failure {
