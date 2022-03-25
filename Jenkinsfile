@@ -31,11 +31,11 @@ pipeline {
               mvn --version
               java -version
               """
-              sh 'r/bin/mvn -DskipTests=true clean package'
+              sh 'mvn -DskipTests=true clean package'
             } catch (error) {
               print(error)
-              echo 'Remove Deploy Files'
-              sh "sudo rm -rf /var/lib/jenkins/workspace/${env.JOB_NAME}/*"
+              echo 'build filed'
+        
               env.mavenBuildResult=false
               currentBuild.result = 'FAILURE'
             }
