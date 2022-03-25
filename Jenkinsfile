@@ -41,16 +41,6 @@ pipeline {
             }
           }
         }
-      """
-        post {
-                failure {
-                  echo 'Maven jar build failure !'
-                }
-                success {
-                  echo 'Maven jar build success !'
-                }
-        }
-        """
     }
   }
   
