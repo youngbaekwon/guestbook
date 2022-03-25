@@ -20,9 +20,7 @@ pipeline {
 
     stage('Maven Jar Build') {
         steps {
-          withMaven() {
             sh '/usr/bin/mvn -DskipTests=true clean package'
-          }
         }
         post {
                 failure {
