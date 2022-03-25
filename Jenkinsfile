@@ -1,9 +1,4 @@
 pipeline {
-  agent any
-  tools {
-    maven 'M3'
-  }
-
   stages {
 
     stage('Checkout Application Git Branch') {
@@ -24,7 +19,9 @@ pipeline {
 
     stage('Maven Jar Build') {
         steps {
-            sh 'mvn -DskipTests=true package'
+ 	    withMaven() {
+            	sh 'mvn -DskipTests=true package'
+	    }
         }
         post {
                 failure {
