@@ -21,7 +21,7 @@ pipeline {
     stage('Maven Jar Build') {
         steps {
           withMaven() {
-            sh './mvnw -DskipTests=true clean package'
+            sh '/usr/bin/mvn -DskipTests=true clean package'
           }
         }
         post {
