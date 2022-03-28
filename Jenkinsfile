@@ -6,7 +6,7 @@ pipeline {
   }
   
   environment {
-    dockerHubRegistry = 'kuberneteskyb/k8s-cicd-guestbook'
+    dockerHubRegistry = 'kuberneteskyb/k8s-guestbook'
     dockerHubRegistryCredential = 'k8s-cicd-dockerhub-cred'
   }
   stages {
