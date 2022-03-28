@@ -1,4 +1,10 @@
 pipeline {
+  agent any
+  
+  tools {
+    maven "maven-3.6.3" 
+  }
+  
   stages {
 
     stage('Checkout Application Git Branch') {
@@ -19,17 +25,21 @@ pipeline {
 
     stage('Maven Jar Build') {
         steps {
- 	    withMaven() {
-            	sh 'mvn -DskipTests=true package'
-	    }
-        }
-        post {
-                failure {
-                  echo 'Maven jar build failure !'
-                }
-                success {
-                  echo 'Maven jar build success !'
-                }
+          script {
+            try {
+              sh """
+              mvn --version
+              java -version
+              """
+              sh 'mvn -DskipTests=true clean package'
+            } catch (error) {
+              print(error)
+              echo 'build filed'
+        
+              env.mavenBuildResult=false
+              currentBuild.result = 'FAILURE'
+            }
+          }
         }
     }
   }
