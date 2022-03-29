@@ -89,8 +89,8 @@ pipeline {
 
     stage('K8S Manifest Update') {
         steps {
-            git credentialsId: '{git-jenkins-credential}',
-                url: 'https://github.com/youngbaekwon/guestbook-manifest.git',
+            git credentialsId: 'jenkins-git-ssh-key',
+                url: 'git@github.com/youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
             sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
