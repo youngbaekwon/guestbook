@@ -97,7 +97,7 @@ pipeline {
             sh "git add guestbook-deployment-secret-v1.yaml"
             sh "git commit -m '[UPDATE] guestbook-manifest ${currentBuild.number} image versioning'"
 
-            sh "git config --global user.email 'yb021.kwon@gmail.com"
+            sh "git config --global user.email 'yb021.kwon@gmail.com'"
             sh "git config --global user.name 'youngbaekwon'"
             sshagent(credentials: ['{git-jenkins-ssh-key}']) {
                 sh "git remote set-url origin git@github.com:youngbaekwon/guestbook-manifest.git"
