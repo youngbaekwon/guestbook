@@ -89,7 +89,7 @@ pipeline {
 
     stage('K8S Manifest Update') {
         steps {
-            git credentialsId: 'jenkins-git-ssh-key',
+            git credentialsId: 'git-jenkins-ssh-key',
                 url: 'git@github.com:youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
@@ -99,7 +99,7 @@ pipeline {
 
             sh "git config --global user.email 'yb021.kwon@gmail.com"
             sh "git config --global user.name 'youngbaekwon'"
-            sshagent(credentials: ['{jenkins-git-ssh-key}']) {
+            sshagent(credentials: ['{git-jenkins-ssh-key}']) {
                 sh "git remote set-url origin git@github.com:youngbaekwon/guestbook-manifest.git"
                 sh "git push -u origin main"
             }
