@@ -89,7 +89,7 @@ pipeline {
 
     stage('K8S Manifest Update') {
         steps {
-            git credentialsId: 'git-jenkins-ssh-key',
+            git credentialsId: 'jenkins-git-ssh-key',
                 url: 'git@github.com:youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
@@ -100,7 +100,7 @@ pipeline {
             sh "git add guestbook-deployment-secret-v1.yaml"
             sh "git commit -m '[UPDATE] guestbook-manifest ${currentBuild.number} image versioning'"
 
-            sshagent(credentials: ['{git-jenkins-ssh-key}']) {
+            sshagent(credentials: ['{jenkins-git-ssh-key}']) {
                 sh "git remote set-url origin git@github.com:youngbaekwon/guestbook-manifest.git"
                 sh "git push -u origin main"
             }
