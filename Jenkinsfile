@@ -93,7 +93,7 @@ pipeline {
                 url: 'https://github.com/youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
-            sh "sed -i 's/k8s-guestbook:.*$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
+            sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
             sh "git add guestbook-deployment-secret-v1.yaml"
             sh "git commit -m '[UPDATE] guestbook-manifest ${currentBuild.number} image versioning'"
             /*sshagent(credentials: ['{k8s-manifest repository credential ID}']) {*/
