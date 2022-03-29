@@ -89,17 +89,21 @@ pipeline {
 
     stage('K8S Manifest Update') {
         steps {
-            git credentialsId: '{git-jenkins-credentialD}',
+            git credentialsId: '{git-jenkins-credential}',
                 url: 'https://github.com/youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
             sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
             sh "git add guestbook-deployment-secret-v1.yaml"
             sh "git commit -m '[UPDATE] guestbook-manifest ${currentBuild.number} image versioning'"
-            /*sshagent(credentials: ['{k8s-manifest repository credential ID}']) {*/
+            /*sshagent(credentials: ['{k8s-manifest repository credential ID}']) {
                 sh "git remote set-url origin https://github.com/youngbaekwon/guestbook-manifest.git"
                 sh "git push -u origin main"
-            /* }*/
+            }*/
+            withCredentials([gitUsernamePassword(credentialsId: 'git-jenkins-credential', gitToolName: 'git-tool')]) {
+                sh "git remote set-url origin https://github.com/youngbaekwon/guestbook-manifest.git"
+                sh "git push -u origin main"
+            }
         }
         post {
                 failure {
