@@ -96,8 +96,7 @@ pipeline {
             sh "git config --global user.email 'yb021.kwon@gmail.com'"
             sh "git config --global user.name 'youngbaekwon'"
             
-            sh "sed -i 's/k8s-guestbook:blue-.*\$/k8s-guestbook:blue-${currentBuild.number}/g' guestbook-rollout-bluegreen.yaml"
-            sh "sed -i 's/k8s-guestbook:green-.*\$/k8s-guestbook:green-${currentBuild.number}/g' guestbook-rollout-bluegreen.yaml"
+            sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-rollout-bluegreen.yaml"
             sh "git add guestbook-rollout-bluegreen.yaml"
             /*
             sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
