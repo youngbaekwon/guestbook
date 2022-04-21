@@ -90,7 +90,8 @@ pipeline {
     stage('K8S Manifest Update') {
         steps {
             git credentialsId: 'jenkins-git-ssh-key',
-                url: 'git@github.com:youngbaekwon/guestbook-manifest.git',
+            //url: 'git@github.com:youngbaekwon/guestbook-manifest.git',
+            url: 'https://github.com/youngbaekwon/guestbook-manifest.git',
                 branch: 'main'
 
             sh "git config --global user.email 'yb021.kwon@gmail.com'"
