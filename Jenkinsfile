@@ -97,12 +97,13 @@ pipeline {
             sh "git config --global user.email 'yb021.kwon@gmail.com'"
             sh "git config --global user.name 'youngbaekwon'"
             
-            /*
             sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-rollout-canary.yaml"
             sh "git add guestbook-rollout-canary.yaml"
-            */
+            
+            /*
             sh "sed -i 's/k8s-guestbook:.*\$/k8s-guestbook:${currentBuild.number}/g' guestbook-deployment-secret-v1.yaml"
             sh "git add guestbook-deployment-secret-v1.yaml"
+            */
             
             sh "git commit -m '[UPDATE] guestbook-manifest ${currentBuild.number} image versioning'"
 
